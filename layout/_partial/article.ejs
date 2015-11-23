@@ -57,9 +57,7 @@ else {
       </div>
     </section><%
   }
-  if (config.fbcomments) {
-  %><section id="comments"><div class="fb-comments" data-href="<%= page.permalink %>" data-numposts="<% if (config.fbcomments.numPosts) { %><%= config.fbcomments.numPosts %><% } else { %>5<% } %>"></div></section><%
-  }
+%><%- fbcomments(post.permalink) %><%
   if (post.comments && config.duoshuo_shortname) {
   %><section id="comments">
     <!-- 多说评论框 start -->
