@@ -1,4 +1,6 @@
-<% if(index) { %>
+<%
+if(index) {
+%>
   <article class="article article-summary">
     <div class="article-summary-inner">
       <%- partial('post/thumbnail') %>
@@ -20,7 +22,10 @@
       </p>
     </div>
   </article>
-<% } else { %>
+<%
+}
+else {
+%>
   <%- partial('google-adsense') %>
   <article id="<%= post.layout %>-<%= post.slug %>" class="article article-single article-type-<%= post.layout %>" itemscope itemprop="blogPost">
     <div class="article-inner">
@@ -44,16 +49,19 @@
         <%- partial('post/tag') %>
       </footer>
     </div>
-  </article>
-  <% if (post.comments && config.disqus_shortname){ %>
-    <section id="comments">
+  </article><%
+  if (post.comments && config.disqus_shortname) {
+  %><section id="comments">
       <div id="disqus_thread">
         <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
       </div>
-    </section>
-  <% } %>
-  <% if (!index && post.comments && config.duoshuo_shortname){ %>
-  <section id="comments">
+    </section><%
+  }
+  if (config.fbcomments) {
+  %><section id="comments"><div class="fb-comments" data-href="<%= page.permalink %>" data-numposts="<% if (config.fbcomments.numPosts) { %><%= config.fbcomments.numPosts %><% } else { %>5<% } %>"></div></section><%
+  }
+  if (post.comments && config.duoshuo_shortname) {
+  %><section id="comments">
     <!-- 多说评论框 start -->
     <div class="ds-thread" data-thread-key="<%= post.layout %>-<%= post.slug %>" data-title="<%= post.title %>" data-url="<%= page.permalink %>"></div>
     <!-- 多说评论框 end -->
@@ -70,6 +78,7 @@
       })();
       </script>
     <!-- 多说公共JS代码 end -->
-  </section>
-  <% } %>
-<% } %>
+  </section><%
+  }
+}
+%>
